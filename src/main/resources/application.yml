@@ -1,0 +1,5 @@
+am.datasource:
+  url: jdbc:mysql://anypoint-rdb-dev-stage-cluster.cluster-ckeb8quwkz5u.ap-northeast-1.rds.amazonaws.com/anypoint_dev?characterEncoding=utf8&useUnicode=true&autoReconnect=true&zeroDateTimeBehavior=convertToNull
+  username: anypoint
+  password: '*emflaj*'
+  driver-class-name: com.mysql.jdbc.Driver

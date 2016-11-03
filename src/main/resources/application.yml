@@ -1,5 +1,13 @@
+spring:
+  profiles.active: local-sys
+
+---
+
+spring:
+  profiles: local-sys
+
 am.datasource:
-  url: jdbc:mysql://anypoint-rdb-dev-stage-cluster.cluster-ckeb8quwkz5u.ap-northeast-1.rds.amazonaws.com/anypoint_dev?characterEncoding=utf8&useUnicode=true&autoReconnect=true&zeroDateTimeBehavior=convertToNull
-  username: anypoint
-  password: '*emflaj*'
+  url: jdbc:mysql://localhost:3306/sys
+  username: root
+  password: 'root'
   driver-class-name: com.mysql.jdbc.Driver

@@ -1,10 +1,15 @@
 buildscript {
     repositories {
         mavenCentral()
+        maven { url 'http://repo.spring.io/plugins-release' }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE")
     }
+}
+
+repositories {
+    mavenCentral()
 }
 
 apply plugin: 'java'
@@ -14,12 +19,40 @@ apply plugin: 'spring-boot'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-repositories {
-    mavenCentral()
+dependencies {
+
+    //boot
+    compile('org.springframework.boot:spring-boot-starter-web')
+
+    //jpa
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+
+    //mysql
+    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.5'
+
+    def queryDSL = '3.7.4'  //nexus에 4.1.2가 있으나 4.1.2로 하면 디펜던시 안걸린다.
+    //query dsl
+    compile group: 'com.mysema.querydsl', name: 'querydsl-core', version:"$queryDSL"
+    compile group: 'com.mysema.querydsl', name: 'querydsl-jpa', version:"$queryDSL"
+    compile group: 'com.mysema.querydsl', name: 'querydsl-apt', version:"$queryDSL"
+    compile group: 'com.mysema.querydsl', name: 'querydsl-sql', version:"$queryDSL"
+
+    //lombok
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.10'
+
+    //test
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
-dependencies {
-    compile("org.springframework.boot:spring-boot-starter-data-jpa")
-    compile("com.h2database:h2")
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+
+//query dsl
+sourceSets {
+    querydsl.java.srcDirs = ['src/main/querydsl']
+}
+
+apply from: 'config-querydsl.gradle'                 //작성한 config-querydsl.gradle 적용.
+
+configurations {
+    provied.exclude group: 'com.querydsl'
+    testCompile.exclude group: 'org.springframework.cloud'
 }

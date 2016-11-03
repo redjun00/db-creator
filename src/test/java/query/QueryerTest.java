@@ -1,8 +1,7 @@
 package query;
 
 import hello.Application;
-import hello.config.DataBaseConfig;
-import hello.domain.Cue;
+import hello.domain.Customer;
 import hello.query.Queryer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,8 +15,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 
-//@SpringApplicationConfiguration(classes = Application.class, initializers = ConfigFileApplicationContextInitializer.class)
-@ContextConfiguration(classes = {Application.class, DataBaseConfig.class}, initializers = ConfigFileApplicationContextInitializer.class)   //context configuration 가져오는 어노테이션 더 알아보자.
+@ContextConfiguration(classes = {Application.class}, initializers = ConfigFileApplicationContextInitializer.class)   //context configuration 가져오는 어노테이션 더 알아보자.
 @RunWith(SpringJUnit4ClassRunner.class)
 public class QueryerTest {
 
@@ -30,11 +28,9 @@ public class QueryerTest {
     @Test
     public void success(){
         assertNotNull(applicationContext);
-
-//        Queryer queryer = applicationContext.getBean(Queryer.class);
         assertNotNull(queryer);
 
-        List<Cue> actual = queryer.getCueTable();
+        List<Customer> actual = queryer.getCueTable();
         System.out.println("actual=" + actual);
     }
 

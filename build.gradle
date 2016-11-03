@@ -28,7 +28,10 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
 
     //mysql
-    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.5'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.38'
+
+    //dbcp
+    compile 'com.zaxxer:HikariCP:2.4.1'
 
     def queryDSL = '3.7.4'  //nexus에 4.1.2가 있으나 4.1.2로 하면 디펜던시 안걸린다.
     //query dsl

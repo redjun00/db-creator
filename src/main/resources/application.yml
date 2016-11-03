@@ -1,13 +1,13 @@
 spring:
-  profiles.active: local-sys
+  profiles.active: local
 
 ---
 
 spring:
-  profiles: local-sys
+  profiles: local
 
 am.datasource:
-  url: jdbc:mysql://localhost:3306/sys
+  url: jdbc:mysql://localhost:3306/store
   username: root
   password: 'root'
   driver-class-name: com.mysql.jdbc.Driver

@@ -1,8 +1,8 @@
 package hello.query;
 
 import com.mysema.query.jpa.impl.JPAQuery;
-import hello.domain.Cue;
-import domain.QCue;
+import hello.domain.Customer;
+import hello.domain.QCustomer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,14 +14,14 @@ import java.util.List;
 public class Queryer {
 
     @Autowired
-    @PersistenceContext         //뭐하는 것?
+    @PersistenceContext         //TODO 뭐하는 것?
     private EntityManager entityManager;
 
 
-    public List<Cue> getCueTable(){
-        QCue qCue = QCue.cue;
+    public List<Customer> getCueTable(){
+        QCustomer qCustomer = QCustomer.customer;
         JPAQuery query = new JPAQuery(entityManager);
-        List<Cue> cueList = query.from(qCue).list(qCue);
+        List<Customer> cueList = query.from(qCustomer).list(qCustomer);
         return cueList;
     }
 }

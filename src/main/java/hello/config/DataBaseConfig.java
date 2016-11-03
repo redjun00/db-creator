@@ -1,6 +1,6 @@
 package hello.config;
 
-import com.mysql.cj.jdbc.MysqlDataSource;
+import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -37,24 +37,24 @@ public class DataBaseConfig {
         return entityManagerFactory.createEntityManager();
     }
 
-    @Bean   //Bean이랑 Component 차이..?
+    @Bean   //TODO Bean이랑 Component 차이..?
     public DataSource amDataSource(){
 
         log.debug("driverClassName=" + driverClassName);
 
-        MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setDatabaseName(driverClassName);
-        dataSource.setUrl(dataSourceUrl);
-        dataSource.setUser(user);
-        dataSource.setPassword(password);
-        return dataSource;
+        HikariDataSource hikariDataSource = new HikariDataSource();
+        hikariDataSource.setDriverClassName(driverClassName);
+        hikariDataSource.setJdbcUrl(dataSourceUrl);
+        hikariDataSource.setUsername(user);
+        hikariDataSource.setPassword(password);
+        return hikariDataSource;
     }
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
         LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
         entityManager.setDataSource(amDataSource());
-        entityManager.setPackagesToScan("domain");
+        entityManager.setPackagesToScan("hello.domain");//이 설정 잘못되어 있으면 entity 못찾는다.
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         entityManager.setJpaVendorAdapter(vendorAdapter);
@@ -62,7 +62,7 @@ public class DataBaseConfig {
         return entityManager;
     }
 
-    //이거는 왜 application yml에 안 넣을을까?
+    //TODO 이거는 왜 application yml에 안 넣을을까?
     private Properties additionalProperties() {
         Properties properties = new Properties();
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");

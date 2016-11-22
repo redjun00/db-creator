@@ -28,10 +28,11 @@ public class SpringTestJpaConfig {
     @Primary//TODO 이게 안 필요하게 할 순 없을까.
     @Bean(destroyMethod = "shutdown")
     public DataSource dataSource() {
-        return new EmbeddedDatabaseBuilder()
+        DataSource datasource = new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
                 .setName("testdb;MODE=MySQL;DATABASE_TO_UPPER=FALSE;")
                 .build();
+        return datasource;
     }
 
     @Bean

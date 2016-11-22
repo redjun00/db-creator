@@ -6,15 +6,15 @@ import com.mysema.query.jpa.impl.JPAUpdateClause;
 import hello.domain.Customer;
 import hello.domain.QCustomer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Component
-public class Queryer {
+@Service
+public class CustomerQueryer {
 
     @Autowired
     @PersistenceContext         //TODO 뭐하는 것?

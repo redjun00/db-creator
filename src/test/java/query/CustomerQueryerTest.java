@@ -2,7 +2,7 @@ package query;
 
 import hello.Application;
 import hello.domain.Customer;
-import hello.query.Queryer;
+import hello.query.CustomerQueryer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +11,6 @@ import org.springframework.boot.test.context.ConfigFileApplicationContextInitial
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,31 +18,31 @@ import static org.junit.Assert.*;
 
 @ContextConfiguration(classes = {Application.class}, initializers = ConfigFileApplicationContextInitializer.class)   //context configuration 가져오는 어노테이션 더 알아보자.
 @RunWith(SpringJUnit4ClassRunner.class)
-public class QueryerTest {
+public class CustomerQueryerTest {
 
     @Autowired
     private ApplicationContext applicationContext;
 
     @Autowired
-    private Queryer queryer;
+    private CustomerQueryer customerQueryer;
 
     @Before
     public void before(){
         assertNotNull(applicationContext);
-        assertNotNull(queryer);
+        assertNotNull(customerQueryer);
     }
 
     @Test
     public void success_getCustomers(){
 
-        List<Customer> actual = queryer.getCustomers();
+        List<Customer> actual = customerQueryer.getCustomers();
         System.out.println("** actual=" + actual);
         assertNotNull(actual);
     }
 
     @Test
     public void success_deleteCustomerById(){
-        List<Customer> baseCustomers = queryer.getCustomers();
+        List<Customer> baseCustomers = customerQueryer.getCustomers();
         assertNotNull(baseCustomers);
         int originalSize = baseCustomers.size();
         assertTrue(originalSize > 0);
@@ -53,13 +52,13 @@ public class QueryerTest {
 
         //test
         long expectedId = expectedCustomer.getId();
-        queryer.deleteCustomerById(expectedId);
+        customerQueryer.deleteCustomerById(expectedId);
 
         //assert
-        List<Customer> customers = queryer.getCustomers();
+        List<Customer> customers = customerQueryer.getCustomers();
         assertFalse(customers.contains(expectedCustomer));
 
-        Customer actualCustomers = queryer.getCustomerById(expectedId);
+        Customer actualCustomers = customerQueryer.getCustomerById(expectedId);
         assertNull(actualCustomers);
     }
 

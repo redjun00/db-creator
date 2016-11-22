@@ -30,6 +30,9 @@ dependencies {
     //mysql
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.38'
 
+    //h2
+    compile group: 'com.h2database', name: 'h2', version: '1.4.193'
+
     //dbcp
     compile 'com.zaxxer:HikariCP:2.4.1'
 

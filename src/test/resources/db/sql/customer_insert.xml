@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <Customer id="0" name="amy" address="mkyong@gmail.com"/>
-    <Customer id="1" name="alex" address="alex@yahoo.com"/>
-    <Customer id="2" name="joel" address="joel@gmail.com"/>
+    <customer id="0" name="amy" address="mkyong@gmail.com"/>
+    <customer id="1" name="alex" address="alex@yahoo.com"/>
+    <customer id="2" name="joel" address="joel@gmail.com"/>
 </dataset>
